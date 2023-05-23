@@ -17,6 +17,11 @@
 
     &__nav {
         margin-left: auto;
+
+        @media (max-width: 768px) {
+            margin-left: 0;
+            width: 100%;
+        }
     }
 }
 </style>

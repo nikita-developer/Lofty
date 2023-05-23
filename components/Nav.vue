@@ -77,9 +77,18 @@
     display: flex;
     align-items: center;
 
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+
     &__item {
         margin-right: 10px;
         margin-left: 10px;
+
+        @media (max-width: 768px) {
+            margin-left: 0;
+            margin-right: 0;
+        }
 
         &:first-child {
             margin-left: 0;
@@ -91,6 +100,7 @@
     }
 
     &__link {
+        display: inline-block;
         color: #fff;
         opacity: 0.8;
         padding: 5px;
