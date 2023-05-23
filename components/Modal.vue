@@ -1,6 +1,6 @@
 <template>
-    <div class="modal">
-        <div class="modal__outside"></div>
+    <div class="modal" v-if="show">
+        <div class="modal__outside" @click="emit('close', false)"></div>
         <div class="modal__container">
             <div class="modal__body">
                 <slot></slot>
@@ -11,6 +11,12 @@
         </div>
     </div>
 </template>
+
+<script setup>
+    const props = defineProps(['show'])
+    const emit = defineEmits(['close'])
+</script>
+
 
 <style lang="scss" scoped>
 .modal {

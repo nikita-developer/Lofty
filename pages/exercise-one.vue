@@ -11,27 +11,10 @@
                 <div class="exercise-one__item"></div>
             </div>
         </div>
-        <Modal>
-            <div class="exercise-modal">
-                <input
-                    type="text"
-                    class="exercise-modal__field"
-                    placeholder="USERNAME"
-                />
-                <input
-                    type="text"
-                    class="exercise-modal__field"
-                    placeholder="PASSWORD"
-                />
-            </div>
-            <template #footer>
-                <div class="exercise-modal__footer">
-                    <button class="exercise-modal__button btn">Send</button>
-                </div>
-            </template>
-        </Modal>
     </div>
 </template>
+
+<script setup></script>
 
 <style scoped lang="scss">
 .exercise-one {
@@ -40,6 +23,7 @@
     grid-auto-rows: minmax(100px, 1fr);
     grid-gap: 20px;
     padding: 20px;
+    border: 5px dashed #fff;
 
     &__item {
         background-color: #c4c4c4;

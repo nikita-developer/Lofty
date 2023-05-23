@@ -22,11 +22,55 @@
                 >
             </li>
             <li class="nav-list__item">
-                <button class="nav-list__button btn">Sign up</button>
+                <button class="nav-list__button btn" @click="isOpenModal = true">Sign up</button>
             </li>
         </ul>
+        <Modal :show="isOpenModal" @close="isOpenModal = false">
+            <div class="exercise-modal">
+                <input
+                    type="text"
+                    class="exercise-modal__field"
+                    placeholder="USERNAME"
+                    v-model.trim="login"
+                />
+                <input
+                    type="text"
+                    class="exercise-modal__field"
+                    placeholder="PASSWORD"
+                    v-model.trim="password"
+                />
+            </div>
+            <template #footer>
+                <div class="exercise-modal__footer">
+                    <button class="exercise-modal__button btn" @click="submit">Send</button>
+                </div>
+            </template>
+        </Modal>
     </nav>
 </template>
+
+<script setup>
+    const isOpenModal = ref(false)
+    const login = ref('')
+    const password = ref('')
+
+    const submit = async () => {
+        const settings = {
+            method: 'POST',
+            body: JSON.stringify({login, password}),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }
+        try {
+            const fetchResponse = await fetch(`https://jsonplaceholder.typicode.com/posts`, settings)
+            const data = await fetchResponse.json()
+            console.log('Post запрос отправлен', data)
+        } catch(e) {
+            return e
+        }
+    }
+</script>
 
 <style scoped lang="scss">
 .nav-list {
