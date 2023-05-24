@@ -154,18 +154,16 @@ hr {
     }
 }
 
-.exercise {
-    &__title {
-        font-size: 28px;
-        color: #fff;
-        margin-bottom: 30px;
-    }
+h1 {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 30px;
+}
 
-    &__subtitle {
-        font-size: 18px;
-        color: #fff;
-        margin-bottom: 15px;
-    }
+h4 {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 15px;
 }
 
 .exercise-modal {
@@ -178,7 +176,7 @@ hr {
         background-color: #393e48;
         color: #fff;
 
-        &+& {
+        & + & {
             margin-top: 20px;
         }
 

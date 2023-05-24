@@ -7,22 +7,36 @@
                 >
             </li>
             <li class="nav-list__item">
-                <NuxtLink class="nav-list__link" to="/exercise-one"
+                <NuxtLink
+                    active-class="active"
+                    class="nav-list__link"
+                    to="/exercise-one"
                     >Задание 1</NuxtLink
                 >
             </li>
             <li class="nav-list__item">
-                <NuxtLink class="nav-list__link" to="/exercise-two"
+                <NuxtLink
+                    active-class="active"
+                    class="nav-list__link"
+                    to="/exercise-two"
                     >Задание 2</NuxtLink
                 >
             </li>
             <li class="nav-list__item">
-                <NuxtLink class="nav-list__link" to="/exercise-three"
+                <NuxtLink
+                    active-class="active"
+                    class="nav-list__link"
+                    to="/exercise-three"
                     >Задание 3</NuxtLink
                 >
             </li>
             <li class="nav-list__item">
-                <button class="nav-list__button btn" @click="isOpenModal = true">Sign up</button>
+                <button
+                    class="nav-list__button btn"
+                    @click="isOpenModal = true"
+                >
+                    Sign up
+                </button>
             </li>
         </ul>
         <Modal :show="isOpenModal" @close="isOpenModal = false">
@@ -42,7 +56,9 @@
             </div>
             <template #footer>
                 <div class="exercise-modal__footer">
-                    <button class="exercise-modal__button btn" @click="submit">Send</button>
+                    <button class="exercise-modal__button btn" @click="submit">
+                        Send
+                    </button>
                 </div>
             </template>
         </Modal>
@@ -50,26 +66,30 @@
 </template>
 
 <script setup>
-    const isOpenModal = ref(false)
-    const login = ref('')
-    const password = ref('')
+const isOpenModal = ref(false)
+const login = ref('')
+const password = ref('')
 
-    const submit = async () => {
-        const settings = {
-            method: 'POST',
-            body: JSON.stringify({login, password}),
-            headers: {
-                'content-type': 'application/json'
-            }
-        }
-        try {
-            const fetchResponse = await fetch(`https://jsonplaceholder.typicode.com/posts`, settings)
-            const data = await fetchResponse.json()
-            console.log('Post запрос отправлен', data)
-        } catch(e) {
-            return e
-        }
+const submit = async () => {
+    const settings = {
+        method: 'POST',
+        body: JSON.stringify({ login, password }),
+        headers: {
+            'content-type': 'application/json',
+        },
     }
+    try {
+        const fetchResponse = await fetch(
+            `https://jsonplaceholder.typicode.com/posts`,
+            settings
+        )
+        const data = await fetchResponse.json()
+        console.log('Post запрос отправлен', data)
+        isOpenModal.value = false
+    } catch (e) {
+        return e
+    }
+}
 </script>
 
 <style scoped lang="scss">
@@ -82,12 +102,11 @@
     }
 
     &__item {
-        margin-right: 10px;
-        margin-left: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
 
         @media (max-width: 768px) {
-            margin-left: 0;
-            margin-right: 0;
+            margin: 5px 0;
         }
 
         &:first-child {
@@ -103,9 +122,14 @@
         display: inline-block;
         color: #fff;
         opacity: 0.8;
-        padding: 5px;
+        padding: 10px 15px;
 
         &:hover {
+            opacity: 1;
+        }
+
+        &.active {
+            background-color: #1a1d2459;
             opacity: 1;
         }
     }

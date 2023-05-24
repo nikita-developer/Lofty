@@ -1,6 +1,6 @@
 <template>
     <div class="exercise">
-        <h1 class="exercise__title">Задание 2</h1>
+        <h1>Задание 2</h1>
         <h4 class="exercise__subtitle">Переписать Promise на Async/Await</h4>
         <hr />
         <div class="exercise__body">
