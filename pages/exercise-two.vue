@@ -21,11 +21,10 @@ getJson('/i/1.json')
 .catch(error => {
     console.error(error)
 })
-</pre
-                >
+                </pre>
             </div>
         </div>
-        <h4 class="exercise__subtitle">Результат</h4>
+        <h4 class="exercise__subtitle">Результат:</h4>
         <hr />
         <div class="exercise__body">
             <div class="exercise-two">
@@ -46,8 +45,7 @@ const getJson = async (url) => {
 }
 
 getJson('/i/1.json')
-</pre
-                >
+                </pre>
             </div>
         </div>
     </div>
