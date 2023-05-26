@@ -5,7 +5,7 @@
             <div class="modal__body">
                 <slot></slot>
             </div>
-            <div class="modal__footer">
+            <div v-if="$slots.footer" class="modal__footer">
                 <slot name="footer"></slot>
             </div>
         </div>
@@ -37,7 +37,7 @@
         bottom: 0;
         left: 0;
         background-color: #000;
-        opacity: 0.5;
+        opacity: 0.8;
     }
 
     &__container {
