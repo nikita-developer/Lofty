@@ -59,29 +59,26 @@
 <script setup>
 // сложность
 let complexity = ref(500)
-
 // поле
 const field = ref(new Array(256))
 // змейка
 const snake = ref([1, 2, 3])
+// активные кнопки и селект
+let activeButton = ref(false)
+// таймер
+let timer
+// модальное окно
+const isOpenModal = ref(false)
+// рандомная вкусняшка
+let food = ref(randomFood())
+// направление
+const directionRun = ref('ArrowLeft')
 
 // рамки поля
 const borderTop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 const borderRight = [15, 31, 47, 63, 79, 95, 111, 127, 143, 159, 175, 191, 207, 223, 239, 255]
 const borderBottom = [240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255]
 const borderLeft = [0, 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240]
-
-let activeButton = ref(false)
-
-let timer
-// модальное окно
-const isOpenModal = ref(false)
-
-// рандомная вкусняшка
-let food = ref(randomFood())
-
-// направление
-const directionRun = ref('ArrowLeft')
 
 const start = () => {
     let foods = []
@@ -93,12 +90,14 @@ const start = () => {
             if (directionRun.value === 'ArrowUp' && event.key === 'ArrowDown') return
             if (directionRun.value === 'ArrowRight' && event.key === 'ArrowLeft') return
             if (directionRun.value === 'ArrowDown' && event.key === 'ArrowUp') return
-            if (directionRun.value === 'ArrowLeft' && event.key === 'ArrowRight') return
-            directionRun.value = event.key
+            if (directionRun.value === 'ArrowLeft' && event.key === 'ArrowRight') return 
+            if(event.key === 'ArrowUp' || event.key === 'ArrowRight' || event.key === 'ArrowDown' || event.key === 'ArrowLeft') directionRun.value = event.key
         }, {once: true})
 
+        // движение змейки
         lengthSnake()
 
+        // проверяем врезалась ли змейка в себя
         snake.value.filter((number, index, numbers) => {
             if (numbers.indexOf(number) !== index) {
                 theEnd()
@@ -119,6 +118,7 @@ const start = () => {
     }, complexity.value)
 }
 
+// функция завершает игру
 const theEnd = () => {
     clearInterval(timer)
     snake.value = [1, 2, 3]
@@ -210,6 +210,7 @@ const direction = (directionRun) => {
         color: #fff;
         font-size: 12px;
         outline: 1px solid rgb(255 255 255 / 10%);
+        transition: .3s;
 
         &.active {
             background-color: yellow;
