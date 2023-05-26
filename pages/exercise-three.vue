@@ -83,6 +83,14 @@ const getJsonMemoize = memoize(getData, 1000)
     background-color: #1e2431;
     color: #fff;
 
+    @media (max-width: 768px) {
+        padding: 15px;
+    }
+
+    pre {
+        overflow-x: auto;
+    }
+
     &:first-child {
         margin-bottom: 40px;
     }

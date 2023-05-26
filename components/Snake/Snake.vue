@@ -45,9 +45,7 @@
                     :class="{
                         active: snake.includes(index) || index === food,
                     }"
-                >
-                    <span>{{ index }}</span>
-                </div>
+                ></div>
             </div>
         </div>
         <Modal :show="isOpenModal" @close="isOpenModal = false">
@@ -209,6 +207,7 @@ document.addEventListener('keydown', (event) => {
         position: relative;
         color: #fff;
         font-size: 12px;
+        outline: 1px solid rgb(255 255 255 / 10%);
 
         &.active {
             background-color: yellow;
@@ -259,7 +258,7 @@ document.addEventListener('keydown', (event) => {
     }
 
     &__select {
-        width: 280px;
+        width: 250px;
         padding: 5px;
         border: 1px solid #fff;
         border-radius: 5px;
