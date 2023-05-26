@@ -10,7 +10,7 @@
                     class="snake-settings__select"
                     v-model="complexity"
                 >
-                    <option :value="500" class="snake-settings__option">Легкая</option>
+                    <option :value="1000" class="snake-settings__option">Легкая</option>
                     <option :value="300" class="snake-settings__option">Средняя</option>
                     <option :value="100" class="snake-settings__option">Тяжелая</option>
                 </select>
@@ -58,7 +58,7 @@
 
 <script setup>
 // сложность
-let complexity = ref(500)
+let complexity = ref(1000)
 
 // поле
 const field = ref(new Array(256))
@@ -77,11 +77,26 @@ let timer
 // модальное окно
 const isOpenModal = ref(false)
 
+// рандомная вкусняшка
+let food = ref(randomFood())
+
+// направление
+const directionRun = ref('ArrowLeft')
+
 const start = () => {
     let foods = []
     activeButton.value = true
 
     timer = setInterval(() => {
+        // запрещаем движение змейки в протвоположное направление
+        document.addEventListener('keydown', (event) => {
+            if (directionRun.value === 'ArrowUp' && event.key === 'ArrowDown') return
+            if (directionRun.value === 'ArrowRight' && event.key === 'ArrowLeft') return
+            if (directionRun.value === 'ArrowDown' && event.key === 'ArrowUp') return
+            if (directionRun.value === 'ArrowLeft' && event.key === 'ArrowRight') return
+            directionRun.value = event.key
+        }, {once: true})
+
         lengthSnake()
 
         snake.value.filter((number, index, numbers) => {
@@ -127,12 +142,6 @@ const lengthSnake = () => {
     }
 }
 
-// рандомная вкусняшка
-let food = ref(randomFood())
-
-// направление
-const directionRun = ref('ArrowLeft')
-
 // рандомное число
 function randomFood() {
     let count = Math.floor(Math.random() * 256)
@@ -173,19 +182,11 @@ const direction = (directionRun) => {
         return (snake.value[0] -= 1)
     }
 }
-
-// запрещаем движение змейки в протвоположное направление
-document.addEventListener('keydown', (event) => {
-    if (directionRun.value === 'ArrowUp' && event.key === 'ArrowDown') return
-    if (directionRun.value === 'ArrowRight' && event.key === 'ArrowLeft') return
-    if (directionRun.value === 'ArrowDown' && event.key === 'ArrowUp') return
-    if (directionRun.value === 'ArrowLeft' && event.key === 'ArrowRight') return
-    directionRun.value = event.key
-})
 </script>
 
 <style lang="scss" scoped>
 .snake {
+    max-width: 500px;
     &__wrap {
         position: relative;
         background-color: #000;
