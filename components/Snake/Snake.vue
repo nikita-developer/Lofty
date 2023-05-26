@@ -10,7 +10,7 @@
                     class="snake-settings__select"
                     v-model="complexity"
                 >
-                    <option :value="1000" class="snake-settings__option">Легкая</option>
+                    <option :value="500" class="snake-settings__option">Легкая</option>
                     <option :value="300" class="snake-settings__option">Средняя</option>
                     <option :value="100" class="snake-settings__option">Тяжелая</option>
                 </select>
@@ -58,7 +58,7 @@
 
 <script setup>
 // сложность
-let complexity = ref(1000)
+let complexity = ref(500)
 
 // поле
 const field = ref(new Array(256))
@@ -124,6 +124,7 @@ const theEnd = () => {
     snake.value = [1, 2, 3]
     activeButton.value = false
     isOpenModal.value = true
+    directionRun.value = 'ArrowLeft'
 }
 
 // хрен пойми что я тут написал но это работает)
