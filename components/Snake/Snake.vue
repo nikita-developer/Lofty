@@ -95,7 +95,16 @@ const start = () => {
         }, {once: true})
 
         // движение змейки
-        lengthSnake()
+        snake.value.reduce((acc, item, i) => {
+            if(i === 0) {
+                acc = snake.value[0]
+                snake.value[0] = direction(directionRun.value)
+                return acc
+            } else {
+                snake.value[i] = acc
+                return acc = item
+            }
+        }, snake.value[0])
 
         // проверяем врезалась ли змейка в себя
         snake.value.filter((number, index, numbers) => {
@@ -125,22 +134,6 @@ const theEnd = () => {
     activeButton.value = false
     isOpenModal.value = true
     directionRun.value = 'ArrowLeft'
-}
-
-// хрен пойми что я тут написал но это работает)
-// короче, эта функция передает элементам массива змейки значение соседнего элемента
-const lengthSnake = () => {
-    let oldCount = snake.value[0]
-    let newCount = snake.value[0]
-
-    // указываем куда двигаться
-    snake.value[0] = direction(directionRun.value)
-
-    for (let i = 1; i < snake.value.length; i++) {
-        oldCount = snake.value[i]
-        snake.value[i] = newCount
-        newCount = oldCount
-    }
 }
 
 // рандомное число
