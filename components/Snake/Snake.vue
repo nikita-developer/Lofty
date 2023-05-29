@@ -80,19 +80,24 @@ const borderRight = [15, 31, 47, 63, 79, 95, 111, 127, 143, 159, 175, 191, 207, 
 const borderBottom = [240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255]
 const borderLeft = [0, 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240]
 
+let position = (event) => {
+    if (directionRun.value === 'ArrowUp' && event.key === 'ArrowDown') return
+    if (directionRun.value === 'ArrowRight' && event.key === 'ArrowLeft') return
+    if (directionRun.value === 'ArrowDown' && event.key === 'ArrowUp') return
+    if (directionRun.value === 'ArrowLeft' && event.key === 'ArrowRight') return 
+    if(event.key === 'ArrowUp' || event.key === 'ArrowRight' || event.key === 'ArrowDown' || event.key === 'ArrowLeft') {
+        directionRun.value = event.key
+        document.removeEventListener('keydown', position)
+    }
+}
+
 const start = () => {
     let foods = []
     activeButton.value = true
 
     timer = setInterval(() => {
         // запрещаем движение змейки в протвоположное направление
-        document.addEventListener('keydown', (event) => {
-            if (directionRun.value === 'ArrowUp' && event.key === 'ArrowDown') return
-            if (directionRun.value === 'ArrowRight' && event.key === 'ArrowLeft') return
-            if (directionRun.value === 'ArrowDown' && event.key === 'ArrowUp') return
-            if (directionRun.value === 'ArrowLeft' && event.key === 'ArrowRight') return 
-            if(event.key === 'ArrowUp' || event.key === 'ArrowRight' || event.key === 'ArrowDown' || event.key === 'ArrowLeft') directionRun.value = event.key
-        }, {once: true})
+        document.addEventListener('keydown', position)
 
         // движение змейки
         snake.value.reduce((acc, item, i) => {
@@ -105,7 +110,6 @@ const start = () => {
                 return acc = item
             }
         }, snake.value[0])
-
         // проверяем врезалась ли змейка в себя
         snake.value.filter((number, index, numbers) => {
             if (numbers.indexOf(number) !== index) {
